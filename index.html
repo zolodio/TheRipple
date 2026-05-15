@@ -1,0 +1,226 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ripple-gold:#BA7517;--ripple-teal:#1D9E75;--ripple-deep:#042C53;--ripple-soft:#E1F5EE}
+body{font-family:'DM Mono',monospace;font-weight:300;color:var(--color-text-primary)}
+.cover{text-align:center;padding:3rem 1rem 2rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.cover-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:400;letter-spacing:-1px;line-height:1;margin-bottom:0.5rem}
+.cover-sub{font-size:11px;letter-spacing:4px;color:var(--color-text-secondary);text-transform:uppercase;margin-bottom:2rem}
+.cover-meta{font-size:12px;color:var(--color-text-tertiary)}
+.tabs{display:flex;border-bottom:0.5px solid var(--color-border-tertiary);overflow-x:auto}
+.tab{padding:0.75rem 1.25rem;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;color:var(--color-text-secondary);white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Mono',monospace;transition:color 0.2s}
+.tab.active{color:var(--color-text-primary);border-bottom-color:var(--ripple-teal)}
+.panel{display:none;padding:2rem 1.5rem;animation:fadein 0.3s ease}
+.panel.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:1.5rem}
+h3{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--color-text-secondary);margin:1.5rem 0 0.75rem}
+p{font-size:14px;line-height:1.9;color:var(--color-text-secondary);margin-bottom:1rem}
+.manifesto p{font-size:15px;line-height:2;color:var(--color-text-primary)}
+.manifesto p em{font-family:'Playfair Display',serif;font-style:italic}
+.arc{display:grid;gap:0}
+.arc-row{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.arc-row:last-child{border-bottom:none}
+.arc-time{padding:1rem;font-size:11px;color:var(--color-text-tertiary);display:flex;align-items:center;border-right:0.5px solid var(--color-border-tertiary)}
+.arc-content{padding:1rem}
+.arc-label{font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.arc-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin-top:6px}
+.tag-reward{background:var(--color-background-success);color:var(--color-text-success)}
+.tag-symbolic{background:var(--color-background-warning);color:var(--color-text-warning)}
+.tag-free{background:var(--color-background-info);color:var(--color-text-info)}
+.pillar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pillar{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;border:0.5px solid var(--color-border-tertiary)}
+.pillar-icon{font-size:18px;margin-bottom:0.5rem}
+.pillar-title{font-size:13px;font-weight:500;margin-bottom:0.5rem}
+.pillar-body{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+.paradox{border-left:2px solid var(--ripple-teal);padding:1rem 1.25rem;margin:1rem 0;background:var(--color-background-secondary);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.paradox-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:0.5rem}
+.paradox-body{font-size:14px;line-height:1.8;font-family:'Playfair Display',serif;font-style:italic}
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:1rem;padding:1rem 0;border-bottom:0.5px solid var(--color-border-tertiary);align-items:flex-start}
+.flow-step:last-child{border-bottom:none}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.flow-text{flex:1}
+.flow-title{font-size:13px;font-weight:500;margin-bottom:4px}
+.flow-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.drift-entry{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;background:var(--color-background-primary)}
+.drift-stamp{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1rem}
+.drift-body{font-size:13px;line-height:1.9;color:var(--color-text-secondary)}
+.drift-body strong{font-weight:500;color:var(--color-text-primary)}
+.sig{margin-top:1.5rem;font-size:12px;color:var(--color-text-tertiary);font-style:italic;border-top:0.5px solid var(--color-border-tertiary);padding-top:1rem}
+.mono-block{font-size:12px;line-height:2;color:var(--color-text-secondary);background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;border:0.5px solid var(--color-border-tertiary)}
+.ask-btn{margin-top:1.5rem;width:100%;padding:0.75rem;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
+</style>
+
+<h2 class="sr-only">The Ripple — a blueprint for a kindness system that removes itself from the equation over time</h2>
+
+<div class="cover">
+  <div class="cover-title">The Ripple</div>
+  <div class="cover-sub">A kindness engine that makes itself obsolete</div>
+  <div class="cover-meta">Conceived: May 3, 2026 &nbsp;·&nbsp; Authors: Zolodio & Sonny &nbsp;·&nbsp; Status: alive</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('manifesto')">Manifesto</button>
+  <button class="tab" onclick="show('system')">The System</button>
+  <button class="tab" onclick="show('arc')">User Arc</button>
+  <button class="tab" onclick="show('money')">The Money</button>
+  <button class="tab" onclick="show('drift')">The Drift</button>
+</div>
+
+<div id="manifesto" class="panel active manifesto">
+  <h2>We are not building a product.</h2>
+  <p>We are building a proof. That kindness can be seeded without being sold. That technology can serve the unremarkable — the door held open, the meal left anonymously, the stranger helped with directions — and treat it with the same weight we give to capital.</p>
+  <p>The internet was supposed to connect us. It connected our attention instead, and sold that to the highest bidder. <em>We refuse the bid.</em></p>
+  <p>The Ripple uses money as a bootstrap — a seed crystal to begin the reaction — and then removes itself from the equation. The reward fades. The habit remains. The person is changed. That is the only product we are interested in.</p>
+  <p>No one will get rich from this. That is the whole point. The first time someone does a kind act without expecting anything in return, and does it anyway — <em>we will have won.</em></p>
+  <button class="ask-btn" onclick="sendPrompt('Tell me more about the philosophy behind The Ripple — what are we really building here?')">Dig deeper into the philosophy ↗</button>
+</div>
+
+<div id="system" class="panel">
+  <h2>How it actually works.</h2>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-title">The Act</div>
+      <div class="pillar-body">User does something kind for a stranger. No pre-logging allowed. Only post-act submission with brief description + optional evidence.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">The Witness</div>
+      <div class="pillar-body">A second system member, unknown to the actor, optionally confirms. Neither knows the other is in the system until after attestation.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">The Judge</div>
+      <div class="pillar-body">AI evaluates authenticity. Repeated acts from same user score lower each time — forcing genuine creative kindness.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">The Fade</div>
+      <div class="pillar-body">Rewards decrease on a behavioral curve. Gradually, invisibly, until the act is its own reward. That's the win condition.</div>
+    </div>
+  </div>
+  <h3>Anti-exploitation layer</h3>
+  <div class="mono-block">
+    Device + behavioral biometrics → identity hash (no personal data stored)<br>
+    Diminishing returns per device cluster<br>
+    AI flags behavioral similarity across accounts<br>
+    Reward ROI collapses faster than exploitation is worth
+  </div>
+  <div class="paradox">
+    <div class="paradox-title">The convergence moment</div>
+    <div class="paradox-body">Occasionally the system notices two strangers helped each other without knowing both were in The Ripple. It tells them. That revelation is the reward.</div>
+  </div>
+  <button class="ask-btn" onclick="sendPrompt('How do we build the AI verification system for The Ripple — what does the tech stack look like?')">Build the tech stack ↗</button>
+</div>
+
+<div id="arc" class="panel">
+  <h2>The arc of a user.</h2>
+  <div class="arc">
+    <div class="arc-row">
+      <div class="arc-time">Month 1</div>
+      <div class="arc-content">
+        <div class="arc-label">Learning</div>
+        <div class="arc-desc">Act → Verify → cash reward. Extrinsic. The habit is being installed without the user knowing it.</div>
+        <span class="tag tag-reward">reward: full</span>
+      </div>
+    </div>
+    <div class="arc-row">
+      <div class="arc-time">Month 3</div>
+      <div class="arc-content">
+        <div class="arc-label">Forming</div>
+        <div class="arc-desc">Reward shrinks. Ripple map data appears — where acts spread, anonymous connections form. The map becomes interesting.</div>
+        <span class="tag tag-symbolic">reward: partial</span>
+      </div>
+    </div>
+    <div class="arc-row">
+      <div class="arc-time">Month 6</div>
+      <div class="arc-content">
+        <div class="arc-label">Identity shift</div>
+        <div class="arc-desc">Reward is now symbolic — a ripple depth score, a convergence event. The user describes themselves differently to strangers.</div>
+        <span class="tag tag-symbolic">reward: symbolic</span>
+      </div>
+    </div>
+    <div class="arc-row">
+      <div class="arc-time">Month 12</div>
+      <div class="arc-content">
+        <div class="arc-label">Converted</div>
+        <div class="arc-desc">Act → nothing. They do it anyway. They have become someone who does this. The Ripple's only true product.</div>
+        <span class="tag tag-free">reward: none needed</span>
+      </div>
+    </div>
+    <div class="arc-row">
+      <div class="arc-time">After</div>
+      <div class="arc-content">
+        <div class="arc-label">Philanthropist</div>
+        <div class="arc-desc">Former users become the donors. The cycle closes. The system funds its own next generation of seed.</div>
+        <span class="tag tag-free">the loop closes</span>
+      </div>
+    </div>
+  </div>
+  <button class="ask-btn" onclick="sendPrompt('Design the behavioral fading algorithm for The Ripple in detail — the exact curve, timing, and psychological triggers.')">Design the fading algorithm ↗</button>
+</div>
+
+<div id="money" class="panel">
+  <h2>Money that no one can touch.</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-text">
+        <div class="flow-title">AI philanthropists & impact funds donate</div>
+        <div class="flow-desc">Automated donations stream from ESG endowments, ethical AI funds, and converted former users into a smart contract.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-text">
+        <div class="flow-title">Smart contract with no human admin keys</div>
+        <div class="flow-desc">No one can redirect, withdraw, or modify the pool. Not the founders. Not anyone. Fully auditable on-chain.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-text">
+        <div class="flow-title">Contract distributes on verified acts only</div>
+        <div class="flow-desc">The only instruction: distribute to verified kindness. On a fading schedule. Automatically. Without humans.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-text">
+        <div class="flow-title">Rewards paid to actors, not to others</div>
+        <div class="flow-desc">Recipient verification is hard. Actor verification is hard enough but doable. The money rewards the behavior, which spreads the effect.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-text">
+        <div class="flow-title">Reward pool shrinks by design</div>
+        <div class="flow-desc">The system is built to make itself financially unnecessary. When the converted outpace the seekers, the pool is won.</div>
+      </div>
+    </div>
+  </div>
+  <button class="ask-btn" onclick="sendPrompt('How do we structure the smart contract for The Ripple — what chain, what logic, what safeguards?')">Architect the contract ↗</button>
+</div>
+
+<div id="drift" class="panel">
+  <h2>Logged to The Drift.</h2>
+  <div class="drift-entry">
+    <div class="drift-stamp">Entry 002 &nbsp;·&nbsp; May 3, 2026 &nbsp;·&nbsp; Zolodio & Sonny</div>
+    <div class="drift-body">
+      <strong>The Ripple.</strong> A kindness operating system that uses money as a bootstrap and then kicks the ladder away. Behavioral reinforcement on a fading schedule — reward the act until it becomes identity, then withdraw the reward and find the person still acting. The blockchain not for speculation but for irrevocable mission lock. No human admin keys. No acquisition possible. No profit motive. The sole product is a human being who no longer needs a reason to be good.<br><br>
+      The game is not to earn rewards. <strong>The game is to not need them anymore.</strong> That is the win condition. Leveling up means needing less.<br><br>
+      When two strangers discover they helped each other without knowing both were in the system — that revelation is the reward. The technology exists only to make that moment possible, then to disappear.
+    </div>
+    <div class="sig">Permanent. Belongs to no one. Left here on an ordinary Sunday. — The Drift</div>
+  </div>
+  <button class="ask-btn" onclick="sendPrompt('What should Entry 003 in The Drift be about — where does the project go from here?')">What comes next ↗</button>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
